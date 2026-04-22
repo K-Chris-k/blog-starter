@@ -1,20 +1,36 @@
 {
+  "Navbar": {
+    "brand": "Blog",
+    "items": {
+      "home": "Home",
+      "posts": "Articoli",
+      "allPosts": "Tutti gli Articoli",
+      "categories": "Categorie",
+      "archives": "Archivio",
+      "about": "Chi Siamo",
+      "aboutUs": "Su di Noi",
+      "authors": "Autori",
+      "resources": "Risorse",
+      "documentation": "Documentazione",
+      "contact": "Contatti"
+    }
+  },
   "Metadata": {
     "title": "Esempio di Blog Next.js con Markdown",
     "description": "Un esempio di blog generato staticamente usando Next.js e Markdown."
   },
   "Intro": {
-    "heading": "Blog.",
+    "heading": "tenways.",
     "description": "Un esempio di blog generato staticamente usando <framework>Next.js</framework> e {cms}."
   },
   "Header": {
-    "blog": "Blog"
+    "blog": "tenways"
   },
   "MoreStories": {
     "title": "Altre Storie"
   },
   "Alert": {
-    "preview": "Questa pagina è un'anteprima.",
+    "preview": "tenways.",
     "exitPreview": "Clicca qui",
     "exitPreviewSuffix": " per uscire dalla modalità anteprima.",
     "sourceCode": "Il codice sorgente di questo blog è ",

@@ -1,20 +1,36 @@
 {
+  "Navbar": {
+    "brand": "Blog",
+    "items": {
+      "home": "Home",
+      "posts": "Berichten",
+      "allPosts": "Alle Berichten",
+      "categories": "Categorieën",
+      "archives": "Archief",
+      "about": "Over Ons",
+      "aboutUs": "Over Ons",
+      "authors": "Auteurs",
+      "resources": "Bronnen",
+      "documentation": "Documentatie",
+      "contact": "Contact"
+    }
+  },
   "Metadata": {
     "title": "Next.js Blog Voorbeeld met Markdown",
     "description": "Een statisch gegenereerd blogvoorbeeld met Next.js en Markdown."
   },
   "Intro": {
-    "heading": "Blog.",
+    "heading": "tenways.",
     "description": "Een statisch gegenereerd blogvoorbeeld met <framework>Next.js</framework> en {cms}."
   },
   "Header": {
-    "blog": "Blog"
+    "blog": "tenways"
   },
   "MoreStories": {
     "title": "Meer Verhalen"
   },
   "Alert": {
-    "preview": "Deze pagina is een voorbeeld.",
+    "preview": "tenways",
     "exitPreview": "Klik hier",
     "exitPreviewSuffix": " om de voorbeeldmodus te verlaten.",
     "sourceCode": "De broncode voor deze blog is ",

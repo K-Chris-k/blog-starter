@@ -1,17 +1,27 @@
 {
-  "Metadata": {
-    "title": "Next.js Blog Example with Markdown",
-    "description": "A statically generated blog example using Next.js and Markdown."
+  "Navbar": {
+    "brand": "Tenways",
+    "items": {
+      "home": "Home",
+      "posts": "Posts",
+      "allPosts": "All Posts",
+      "categories": "Categories",
+      "archives": "Archives",
+      "about": "About",
+      "aboutUs": "About Us",
+      "authors": "Authors",
+      "resources": "Resources",
+      "documentation": "Documentation",
+      "github": "GitHub",
+      "contact": "Contact"
+    }
   },
-  "Intro": {
-    "heading": "Blog.",
-    "description": "A statically generated blog example using <framework>Next.js</framework> and {cms}."
+  "Metadata": {
+    "title": "Tenways",
+    "description": "Tenways is a company that provides software development services."
   },
   "Header": {
-    "blog": "Blog"
-  },
-  "MoreStories": {
-    "title": "More Stories"
+    "blog": "Tenways"
   },
   "Alert": {
     "preview": "This page is a preview.",

@@ -3,12 +3,12 @@ import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Footer from "@/app/_components/footer";
+import { Navbar } from "@/app/_components/navbar";
 import { HOME_OG_IMAGE_URL } from "@/lib/constants";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import cn from "classnames";
 import { ThemeSwitcher } from "../_components/theme-switcher";
-import { LocaleSwitcher } from "../_components/locale-switcher";
 
 import "../globals.css";
 
@@ -84,10 +84,8 @@ export default async function LocaleLayout(props: Props) {
       >
         <ThemeSwitcher />
         <NextIntlClientProvider messages={messages}>
-          <div className="fixed top-4 right-16 z-50">
-            <LocaleSwitcher />
-          </div>
-          <div className="min-h-screen">{props.children}</div>
+          <Navbar />
+          <div className="min-h-screen pt-14">{props.children}</div>
           <Footer />
         </NextIntlClientProvider>
       </body>
