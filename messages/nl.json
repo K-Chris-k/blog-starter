@@ -1,0 +1,29 @@
+{
+  "Metadata": {
+    "title": "Next.js Blog Voorbeeld met Markdown",
+    "description": "Een statisch gegenereerd blogvoorbeeld met Next.js en Markdown."
+  },
+  "Intro": {
+    "heading": "Blog.",
+    "description": "Een statisch gegenereerd blogvoorbeeld met <framework>Next.js</framework> en {cms}."
+  },
+  "Header": {
+    "blog": "Blog"
+  },
+  "MoreStories": {
+    "title": "Meer Verhalen"
+  },
+  "Alert": {
+    "preview": "Deze pagina is een voorbeeld.",
+    "exitPreview": "Klik hier",
+    "exitPreviewSuffix": " om de voorbeeldmodus te verlaten.",
+    "sourceCode": "De broncode voor deze blog is ",
+    "availableOnGitHub": "beschikbaar op GitHub"
+  },
+  "CoverImage": {
+    "alt": "Omslagafbeelding voor {title}"
+  },
+  "Post": {
+    "titleSuffix": "{title} | Next.js Blog Voorbeeld met Markdown"
+  }
+}

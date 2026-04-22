@@ -1,6 +1,7 @@
 import cn from "classnames";
-import Link from "next/link";
 import Image from "next/image";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 
 type Props = {
   title: string;
@@ -9,10 +10,12 @@ type Props = {
 };
 
 const CoverImage = ({ title, src, slug }: Props) => {
+  const t = useTranslations("CoverImage");
+
   const image = (
     <Image
       src={src}
-      alt={`Cover Image for ${title}`}
+      alt={t("alt", { title })}
       className={cn("shadow-sm w-full", {
         "hover:shadow-lg transition-shadow duration-200": slug,
       })}
