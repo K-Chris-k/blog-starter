@@ -9,6 +9,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import cn from "classnames";
 import { ThemeSwitcher } from "../_components/theme-switcher";
+import { ErrorReporter } from "../_components/error-reporter";
 
 import "../globals.css";
 
@@ -83,6 +84,7 @@ export default async function LocaleLayout(props: Props) {
         )}
       >
         <ThemeSwitcher />
+        <ErrorReporter />
         <NextIntlClientProvider messages={messages}>
           <Navbar />
           <div className="min-h-screen pt-14">{props.children}</div>
