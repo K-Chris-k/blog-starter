@@ -41,5 +41,11 @@
   },
   "Post": {
     "titleSuffix": "{title} | Esempio di Blog Next.js con Markdown"
+  },
+  "Reports": {
+    "title": "Rapporti Finanziari",
+    "download": "Scarica",
+    "fileSize": "Dimensione file",
+    "publishDate": "Pubblicato"
   }
 }

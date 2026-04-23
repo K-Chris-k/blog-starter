@@ -35,5 +35,11 @@
   },
   "Post": {
     "titleSuffix": "{title} | Next.js Blog Example with Markdown"
+  },
+  "Reports": {
+    "title": "Financial Reports",
+    "download": "Download",
+    "fileSize": "File Size",
+    "publishDate": "Published"
   }
 }
