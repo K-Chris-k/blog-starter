@@ -20,8 +20,15 @@
     "title": "Tenways",
     "description": "Tenways is a company that provides software development services."
   },
+  "Intro": {
+    "heading": "Blog.",
+    "description": "A statically generated blog example using <framework>Next.js</framework> and {cms}."
+  },
   "Header": {
     "blog": "Tenways"
+  },
+  "MoreStories": {
+    "title": "More Stories"
   },
   "Alert": {
     "preview": "This page is a preview.",
