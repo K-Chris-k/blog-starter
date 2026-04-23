@@ -1,13 +1,13 @@
 ---
 title: "Preview Mode for Static Generation"
 excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus."
-coverImage: "/assets/blog/preview/cover.jpg"
+coverImage: "/api/file/3e466019-ea2a-4cb5-8135-3c18f61a5b47"
 date: "2020-03-16T05:35:07.322Z"
 author:
   name: Joe Haddad
-  picture: "/assets/blog/authors/joe.jpeg"
+  picture: "/api/file/d6f7adda-f042-4afa-8d04-cff0c43b9c8a"
 ogImage:
-  url: "/assets/blog/preview/cover.jpg"
+  url: "/api/file/3e466019-ea2a-4cb5-8135-3c18f61a5b47"
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus. Praesent elementum facilisis leo vel fringilla. Congue mauris rhoncus aenean vel. Egestas sed tempus urna et pharetra pharetra massa massa ultricies.

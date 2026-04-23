@@ -1,13 +1,13 @@
 ---
 title: "Dynamische Routering en Statische Generatie"
 excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus."
-coverImage: "/assets/blog/dynamic-routing/cover.jpg"
+coverImage: "/api/file/beacf4d7-9049-4334-8b94-2d54491fab98"
 date: "2020-03-16T05:35:07.322Z"
 author:
   name: JJ Kasper
-  picture: "/assets/blog/authors/jj.jpeg"
+  picture: "/api/file/9ccb754f-5af9-47a3-90cd-f89e6831871c"
 ogImage:
-  url: "/assets/blog/dynamic-routing/cover.jpg"
+  url: "/api/file/beacf4d7-9049-4334-8b94-2d54491fab98"
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus. Praesent elementum facilisis leo vel fringilla. Congue mauris rhoncus aenean vel. Egestas sed tempus urna et pharetra pharetra massa massa ultricies.
