@@ -12,8 +12,15 @@
 
 import crypto from "crypto";
 
-/** 签名密钥：从环境变量读取，生产环境必须设置为随机强密码 */
-const SECRET = process.env.SIGNING_SECRET || "dev-secret";
+/** 签名密钥：从 .env.development 读取，生产环境必须设置为随机强密码 */
+function getSecret(): string {
+  if (!process.env.SIGNING_SECRET) {
+    throw new Error(
+      "Missing SIGNING_SECRET environment variable. Check .env.development",
+    );
+  }
+  return process.env.SIGNING_SECRET;
+}
 
 /**
  * 已使用过的 nonce 集合 —— 防重放攻击
@@ -49,7 +56,7 @@ export function generateSignedUrl(
 
   // 用 HMAC-SHA256 算法 + SECRET 密钥 生成签名
   const signature = crypto
-    .createHmac("sha256", SECRET)
+    .createHmac("sha256", getSecret())
     .update(data)
     .digest("hex");
 
@@ -78,7 +85,7 @@ export function verifySignature(
   // 检查 3：用同样的方式重新计算签名
   const data = `${filePath}:${expires}:${nonce}`;
   const expected = crypto
-    .createHmac("sha256", SECRET)
+    .createHmac("sha256", getSecret())
     .update(data)
     .digest("hex");
 
