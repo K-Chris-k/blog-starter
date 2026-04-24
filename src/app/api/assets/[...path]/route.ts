@@ -1,9 +1,24 @@
+/**
+ * 静态资源 API（备用） —— 通过路径从 private-assets 提供文件
+ *
+ * 路径: GET /api/assets/{path}
+ * 用途: 作为 /api/file/[uuid] 的备用方案，通过路径而非 UUID 访问文件
+ *
+ * 安全措施：
+ *   - Referer 检查：只允许来自本站的请求，防止外站盗链
+ *   - 路径穿越防护：检查路径不超出 private-assets 目录
+ *   - 错误日志：异常写入数据库
+ *
+ * 注意：推荐优先使用 /api/file/[uuid]（更安全），此接口作为兼容保留
+ */
+
 import { NextRequest } from "next/server";
 import { readFile } from "fs/promises";
 import { join, extname } from "path";
 import { existsSync } from "fs";
 import { logError } from "@/lib/logger";
 
+/** 文件扩展名 → HTTP Content-Type 映射 */
 const MIME_TYPES: Record<string, string> = {
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
@@ -14,13 +29,16 @@ const MIME_TYPES: Record<string, string> = {
   ".pdf": "application/pdf",
 };
 
+/** 允许访问的来源域名（生产环境需要添加正式域名） */
 const ALLOWED_HOSTS = [
   "localhost",
   "127.0.0.1",
-  // Add your production domain here:
-  // "ir.yourcompany.com",
 ];
 
+/**
+ * 检查 Referer 请求头 —— 防止外站盗链
+ * 只允许来自 ALLOWED_HOSTS 的请求，无 Referer 的直接访问也放行
+ */
 function isAllowedReferer(referer: string | null): boolean {
   if (!referer) return true;
   try {

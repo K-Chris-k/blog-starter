@@ -1,9 +1,20 @@
+/**
+ * 语言切换器组件 —— 显示 EN / NL / IT 按钮，点击切换网站语言
+ *
+ * 工作原理：
+ *   - useLocale() 获取当前语言（如 "en"）
+ *   - usePathname() 获取当前页面路径（不含语言前缀，如 "/posts/hello"）
+ *   - router.replace(pathname, { locale: "nl" }) 跳转到同一页面的荷兰语版本
+ *     即 /en/posts/hello → /nl/posts/hello，页面内容不变，语言切换
+ */
+
 "use client";
 
 import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { routing } from "@/i18n/routing";
 
+/** 各语言的显示标签 */
 const localeLabels: Record<string, string> = {
   en: "EN",
   nl: "NL",
@@ -11,10 +22,11 @@ const localeLabels: Record<string, string> = {
 };
 
 export function LocaleSwitcher() {
-  const locale = useLocale();
-  const pathname = usePathname();
-  const router = useRouter();
+  const locale = useLocale();      // 当前语言
+  const pathname = usePathname();  // 当前页面路径（不含 /en、/nl 前缀）
+  const router = useRouter();      // 国际化路由器
 
+  /** 切换语言：保持当前页面不变，只替换 URL 中的语言前缀 */
   const handleChange = (newLocale: string) => {
     router.replace(pathname, { locale: newLocale });
   };

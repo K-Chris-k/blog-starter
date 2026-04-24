@@ -1,6 +1,18 @@
+/**
+ * 财报下载区域组件 —— 从数据库读取已发布的 PDF 列表，渲染下载卡片
+ *
+ * 这是一个服务端组件（没有 "use client"），在服务端直接查询数据库：
+ *   1. 调用 listFiles() 查询 file_registry 表中 status=published 且 category=report 的记录
+ *   2. 渲染为卡片列表，每张卡片显示文件名、大小、日期和下载按钮
+ *   3. 下载按钮链接到 /api/download/{uuid}，走签名 URL 流程
+ *
+ * 新增 PDF 后无需改此文件，组件自动从数据库读取最新列表
+ */
+
 import { listFiles } from "@/lib/files";
 import { getTranslations } from "next-intl/server";
 
+/** 格式化文件大小：字节 → 人类可读（如 7468594 → "7.1 MB"） */
 function formatFileSize(bytes: number | null): string {
   if (!bytes) return "-";
   if (bytes < 1024) return `${bytes} B`;
@@ -8,6 +20,7 @@ function formatFileSize(bytes: number | null): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
+/** 格式化日期：ISO 字符串 → yyyy-MM-dd 格式 */
 function formatDate(dateStr: string): string {
   return new Date(dateStr).toLocaleDateString("en-CA");
 }
