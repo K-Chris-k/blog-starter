@@ -1,72 +1,154 @@
-# A statically generated blog example using Next.js, Markdown, and TypeScript
+# Tenways IR — 投资者关系网站
 
-This is the existing [blog-starter](https://github.com/vercel/next.js/tree/canary/examples/blog-starter) plus TypeScript.
+基于 Next.js App Router 构建的投资者关系（IR）网站，支持多语言、文件加密保护、PDF 下载、错误日志等企业级功能。
 
-This example showcases Next.js's [Static Generation](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates) feature using Markdown files as the data source.
+## 技术栈
 
-The blog posts are stored in `/_posts` as Markdown files with front matter support. Adding a new Markdown file in there will create a new blog post.
+| 技术 | 版本 | 用途 |
+|------|------|------|
+| Node.js | >= 20.x | 运行环境 |
+| Next.js | 16.x (App Router) | 前端框架 |
+| React | 19.x | UI 库 |
+| TypeScript | 5.x | 类型检查 |
+| next-intl | 4.x | 国际化（i18n） |
+| Tailwind CSS | 3.x | 样式框架 |
+| MySQL | 9.x | 数据库 |
+| mysql2 | 3.x | Node.js MySQL 驱动 |
 
-To create the blog posts we use [`remark`](https://github.com/remarkjs/remark) and [`remark-html`](https://github.com/remarkjs/remark-html) to convert the Markdown files into an HTML string, and then send it down as a prop to the page. The metadata of every post is handled by [`gray-matter`](https://github.com/jonschlinkert/gray-matter) and also sent in props to the page.
+## 支持语言
 
-## Demo
+- English (en) — 默认
+- Nederlands (nl) — 荷兰语
+- Italiano (it) — 意大利语
 
-[https://next-blog-starter.vercel.app/](https://next-blog-starter.vercel.app/)
+## 项目结构
 
-## Deploy your own
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/blog-starter&project-name=blog-starter&repository-name=blog-starter)
-
-### Related examples
-
-- [AgilityCMS](/examples/cms-agilitycms)
-- [Builder.io](/examples/cms-builder-io)
-- [ButterCMS](/examples/cms-buttercms)
-- [Contentful](/examples/cms-contentful)
-- [Cosmic](/examples/cms-cosmic)
-- [DatoCMS](/examples/cms-datocms)
-- [DotCMS](/examples/cms-dotcms)
-- [Drupal](/examples/cms-drupal)
-- [Enterspeed](/examples/cms-enterspeed)
-- [Ghost](/examples/cms-ghost)
-- [GraphCMS](/examples/cms-graphcms)
-- [Kontent.ai](/examples/cms-kontent-ai)
-- [MakeSwift](/examples/cms-makeswift)
-- [Payload](/examples/cms-payload)
-- [Plasmic](/examples/cms-plasmic)
-- [Prepr](/examples/cms-prepr)
-- [Prismic](/examples/cms-prismic)
-- [Sanity](/examples/cms-sanity)
-- [Sitecore XM Cloud](/examples/cms-sitecore-xmcloud)
-- [Sitefinity](/examples/cms-sitefinity)
-- [Storyblok](/examples/cms-storyblok)
-- [TakeShape](/examples/cms-takeshape)
-- [Tina](/examples/cms-tina)
-- [Umbraco](/examples/cms-umbraco)
-- [Umbraco heartcore](/examples/cms-umbraco-heartcore)
-- [Webiny](/examples/cms-webiny)
-- [WordPress](/examples/cms-wordpress)
-- [Blog Starter](/examples/blog-starter)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
-```bash
-npx create-next-app --example blog-starter blog-starter-app
+```
+├── _posts/{locale}/          # Markdown 文章（按语言分目录）
+├── messages/                 # i18n 翻译文件（en.json / nl.json / it.json）
+├── private-assets/           # 受保护的文件（图片、PDF，不对外暴露）
+│   ├── blog/                 # 文章图片（作者头像、封面）
+│   └── reports/              # 财报 PDF
+├── public/favicon/           # 网站图标
+├── scripts/                  # 数据库和文件注册脚本
+│   ├── init-db.sql           # 初始化数据库（建库 + 3 张基础表）
+│   ├── add-ir-tables.sql     # IR 功能扩展表（邮件订阅、RSS、联系表单）
+│   ├── db-config.mjs         # 脚本共享数据库配置（读取 .env.development）
+│   ├── register-images.mjs   # 注册图片到数据库（生成 UUID）
+│   └── register-pdf.mjs      # 注册 PDF 到数据库（生成 UUID）
+├── src/
+│   ├── app/
+│   │   ├── [locale]/         # 国际化页面
+│   │   │   ├── page.tsx              # 首页
+│   │   │   ├── posts/[slug]/page.tsx # 文章详情
+│   │   │   ├── email-alerts/         # 邮件订阅页
+│   │   │   ├── rss-feeds/            # RSS 订阅页
+│   │   │   └── ir-contacts/          # 投资者联系页
+│   │   ├── _components/      # UI 组件
+│   │   └── api/              # API 路由
+│   │       ├── file/[uuid]/          # 通过 UUID 获取图片
+│   │       ├── download/[uuid]/      # 通过 UUID 下载 PDF
+│   │       ├── signed/[...path]/     # 签名 URL 文件服务
+│   │       ├── email-subscribe/      # 邮件订阅 API
+│   │       ├── ir-contact/           # 投资者联系表单 API
+│   │       ├── rss/[type]/           # RSS Feed API
+│   │       ├── errors/               # 错误日志 API
+│   │       └── assets/[...path]/     # 备用资源 API
+│   ├── i18n/                 # 国际化配置（routing + request）
+│   └── lib/                  # 工具库
+│       ├── db.ts             # 数据库连接池
+│       ├── files.ts          # 文件注册与查询
+│       ├── signing.ts        # 签名 URL 生成与验证
+│       ├── logger.ts         # 错误日志写入
+│       └── api.ts            # Markdown 文章读取
+└── .env.development          # 开发环境配置（不提交到 Git）
 ```
 
-```bash
-yarn create next-app --example blog-starter blog-starter-app
-```
+## 快速开始
+
+### 1. 安装依赖
 
 ```bash
-pnpm create next-app --example blog-starter blog-starter-app
+npm install
 ```
 
-Your blog should be up and running on [http://localhost:3000](http://localhost:3000)! If it doesn't work, post on [GitHub discussions](https://github.com/vercel/next.js/discussions).
+### 2. 配置环境变量
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+在项目根目录创建 `.env.development` 文件：
 
-# Notes
+```env
+# MySQL 数据库配置
+MYSQL_HOST=127.0.0.1
+MYSQL_PORT=3306
+MYSQL_DATABASE=blog_starter
+MYSQL_USER=root
+MYSQL_PASSWORD=your_password_here
 
-`blog-starter` uses [Tailwind CSS](https://tailwindcss.com) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3).
+# 签名 URL 密钥
+SIGNING_SECRET=your_random_secret_here
+```
+
+### 3. 初始化数据库
+
+确保 MySQL 服务已启动，然后执行：
+
+```bash
+# 创建数据库和基础表（error_logs、file_registry、download_logs）
+mysql -u root -p < scripts/init-db.sql
+
+# 创建 IR 扩展表（email_subscriptions、rss_feeds、ir_contact_messages）
+mysql -u root -p < scripts/add-ir-tables.sql
+```
+
+### 4. 注册资源文件
+
+```bash
+# 注册图片到数据库（生成 UUID，用于文章中引用）
+node scripts/register-images.mjs
+
+# 注册 PDF 到数据库（生成 UUID，用于下载页面）
+node scripts/register-pdf.mjs
+```
+
+### 5. 启动开发服务器
+
+```bash
+npm run dev
+```
+
+访问 http://localhost:3000
+
+### 6. 构建与生产运行
+
+```bash
+npm run build
+npm run start
+```
+
+## 数据库表结构
+
+| 表名 | 用途 |
+|------|------|
+| `error_logs` | 前端/后端错误日志 |
+| `file_registry` | 文件注册（图片、PDF 的 UUID 映射） |
+| `download_logs` | 文件下载记录 |
+| `email_subscriptions` | 邮件订阅 |
+| `rss_feeds` | RSS 内容管理 |
+| `ir_contact_messages` | 投资者联系表单 |
+
+## 主要功能
+
+- **多语言支持**：基于 next-intl，URL 自动携带语言前缀（/en、/nl、/it）
+- **文件加密保护**：图片和 PDF 通过 UUID 访问，真实路径不暴露
+- **签名 URL 下载**：PDF 下载使用带时效和防重放的签名链接
+- **错误日志系统**：自动捕获前端 JS 错误和后端 API 异常，写入数据库
+- **投资者关系功能**：邮件订阅、RSS 订阅、IR 联系表单
+- **安全防护**：三层目录保护（Nginx + Middleware + next.config.ts）、限速、文件名过滤
+
+## 生产部署
+
+生产环境需要：
+
+1. 创建 `.env.production` 配置文件（替换数据库密码和签名密钥）
+2. 配置 Nginx 反向代理（HTTPS、限流、敏感目录拦截、真实 IP 传递）
+3. 使用 PM2 管理 Node.js 进程
