@@ -1,17 +1,14 @@
-import Container from "@/app/_components/container";
-import { EXAMPLE_PATH } from "@/lib/constants";
+import { FooterToolbar } from "./footer-toolbar";
 
 export function Footer() {
   return (
     <footer className="bg-neutral-50 border-t border-neutral-200 dark:bg-slate-800">
-      <Container>
-        <div className="py-28 flex flex-col lg:flex-row items-center">
-        
-          <div className="flex flex-col lg:flex-row justify-center items-center lg:pl-4 lg:w-1/2">
-           
-          </div>
+      <FooterToolbar />
+      <div className="container mx-auto px-5">
+        <div className="py-6 text-center text-xs text-neutral-400 dark:text-neutral-500">
+          © {new Date().getFullYear()} Tenways. All rights reserved.
         </div>
-      </Container>
+      </div>
     </footer>
   );
 }
