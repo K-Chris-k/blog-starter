@@ -1,3 +1,4 @@
+/** 文章详情页顶部导航 —— 显示返回首页的链接 */
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 

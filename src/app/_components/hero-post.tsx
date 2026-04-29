@@ -1,3 +1,4 @@
+/** 首页 Hero 文章组件 —— 大尺寸展示最新文章（封面图、标题、摘要、作者） */
 import Avatar from "@/app/_components/avatar";
 import CoverImage from "@/app/_components/cover-image";
 import { type Author } from "@/interfaces/author";

@@ -1,3 +1,4 @@
+/** 首页介绍区域组件 —— 显示网站标题和副标题 */
 import { useTranslations } from "next-intl";
 
 export function Intro() {

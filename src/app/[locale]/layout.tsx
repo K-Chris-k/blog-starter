@@ -1,3 +1,11 @@
+/**
+ * 前台国际化根布局 —— /[locale]
+ *
+ * 职责：
+ *   - 根据 locale 参数加载对应语言的翻译文件（messages/en.json 等）
+ *   - 通过 NextIntlClientProvider 向所有子组件提供翻译上下文
+ *   - 包含全局组件：ThemeSwitcher、ErrorReporter、Navbar、Footer
+ */
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";

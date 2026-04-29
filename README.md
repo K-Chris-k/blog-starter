@@ -14,6 +14,7 @@
 | Tailwind CSS | 3.x | 样式框架 |
 | MySQL | 9.x | 数据库 |
 | mysql2 | 3.x | Node.js MySQL 驱动 |
+| bcryptjs | 3.x | 密码加密（后台管理） |
 
 ## 支持语言
 
@@ -38,14 +39,27 @@
 │   └── register-pdf.mjs      # 注册 PDF 到数据库（生成 UUID）
 ├── src/
 │   ├── app/
-│   │   ├── [locale]/         # 国际化页面
+│   │   ├── [locale]/         # 前台国际化页面
 │   │   │   ├── page.tsx              # 首页
 │   │   │   ├── posts/[slug]/page.tsx # 文章详情
 │   │   │   ├── email-alerts/         # 邮件订阅页
 │   │   │   ├── rss-feeds/            # RSS 订阅页
 │   │   │   └── ir-contacts/          # 投资者联系页
-│   │   ├── _components/      # UI 组件
+│   │   ├── ir-dashboard/     # 后台管理系统（独立路由，不走 i18n）
+│   │   │   ├── login/                # 登录页
+│   │   │   ├── (dashboard)/          # 管理面板（Route Group，共享侧边栏）
+│   │   │   │   ├── page.tsx          # 仪表盘
+│   │   │   │   ├── error-logs/       # 错误日志管理
+│   │   │   │   ├── files/            # 文件管理
+│   │   │   │   ├── downloads/        # 下载记录
+│   │   │   │   ├── subscriptions/    # 邮件订阅管理
+│   │   │   │   ├── rss/              # RSS 管理
+│   │   │   │   ├── contacts/         # 投资者联系管理
+│   │   │   │   └── accounts/         # 账户管理
+│   │   │   └── _components/          # 后台专用组件
+│   │   ├── _components/      # 前台 UI 组件
 │   │   └── api/              # API 路由
+│   │       ├── ir-dashboard/         # 后台管理 API（登录、数据查询、账户管理）
 │   │       ├── file/[uuid]/          # 通过 UUID 获取图片
 │   │       ├── download/[uuid]/      # 通过 UUID 下载 PDF
 │   │       ├── signed/[...path]/     # 签名 URL 文件服务
@@ -57,6 +71,7 @@
 │   ├── i18n/                 # 国际化配置（routing + request）
 │   └── lib/                  # 工具库
 │       ├── db.ts             # 数据库连接池
+│       ├── admin-auth.ts     # 后台认证（JWT 生成/验证、bcrypt 密码处理）
 │       ├── files.ts          # 文件注册与查询
 │       ├── signing.ts        # 签名 URL 生成与验证
 │       ├── logger.ts         # 错误日志写入
@@ -86,6 +101,9 @@ MYSQL_PASSWORD=your_password_here
 
 # 签名 URL 密钥
 SIGNING_SECRET=your_random_secret_here
+
+# 后台管理 JWT 密钥
+ADMIN_JWT_SECRET=your_admin_jwt_secret_here
 ```
 
 ### 3. 初始化数据库
@@ -98,6 +116,9 @@ mysql -u root -p < scripts/init-db.sql
 
 # 创建 IR 扩展表（email_subscriptions、rss_feeds、ir_contact_messages）
 mysql -u root -p < scripts/add-ir-tables.sql
+
+# 创建后台管理员账户表
+mysql -u root -p < scripts/add-admin-table.sql
 ```
 
 ### 4. 注册资源文件
@@ -110,15 +131,22 @@ node scripts/register-images.mjs
 node scripts/register-pdf.mjs
 ```
 
-### 5. 启动开发服务器
+### 5. 创建后台管理员
+
+```bash
+node scripts/create-admin.mjs admin your_password Administrator
+```
+
+### 6. 启动开发服务器
 
 ```bash
 npm run dev
 ```
 
-访问 http://localhost:3000
+前台访问 http://localhost:3000
+后台访问 http://localhost:3000/ir-dashboard/login
 
-### 6. 构建与生产运行
+### 7. 构建与生产运行
 
 ```bash
 npm run build
@@ -135,6 +163,7 @@ npm run start
 | `email_subscriptions` | 邮件订阅 |
 | `rss_feeds` | RSS 内容管理 |
 | `ir_contact_messages` | 投资者联系表单 |
+| `admin_accounts` | 后台管理员账户（用户名、bcrypt 密码、角色） |
 
 ## 主要功能
 
@@ -144,6 +173,13 @@ npm run start
 - **错误日志系统**：自动捕获前端 JS 错误和后端 API 异常，写入数据库
 - **投资者关系功能**：邮件订阅、RSS 订阅、IR 联系表单
 - **安全防护**：三层目录保护（Nginx + Middleware + next.config.ts）、限速、文件名过滤
+- **后台管理系统**（ir-dashboard）：
+  - JWT + HttpOnly Cookie 认证，bcrypt 密码加密
+  - 仪表盘：各表数据统计概览
+  - 错误日志：可展开详情查看完整堆栈和上下文
+  - 文件管理：查看所有受保护文件的 UUID、路径、状态
+  - 下载记录、邮件订阅、RSS、投资者联系：分页 + 筛选查看
+  - 账户管理：创建/启用/禁用管理员，支持 admin（完全权限）和 viewer（只读）角色
 
 ## 生产部署
 

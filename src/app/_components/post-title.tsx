@@ -1,3 +1,4 @@
+/** 文章标题组件 —— 文章详情页的大号标题 */
 import { ReactNode } from "react";
 
 type Props = {

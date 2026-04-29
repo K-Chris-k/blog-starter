@@ -1,3 +1,4 @@
+/** 更多文章列表组件 —— 以网格布局展示除 Hero 外的其他文章 */
 import { Post } from "@/interfaces/post";
 import { PostPreview } from "./post-preview";
 import { useTranslations } from "next-intl";

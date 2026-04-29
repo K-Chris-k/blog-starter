@@ -1,3 +1,4 @@
+/** 顶部导航栏组件 —— 固定在页面顶部，包含 Logo、导航链接、语言切换器 */
 "use client";
 
 import { useState, useRef, useEffect } from "react";

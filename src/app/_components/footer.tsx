@@ -1,3 +1,4 @@
+/** 页脚组件 —— 包含底部工具栏（FooterToolbar）和版权信息 */
 import { FooterToolbar } from "./footer-toolbar";
 
 export function Footer() {

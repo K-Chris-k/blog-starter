@@ -1,3 +1,4 @@
+/** 文章正文组件 —— 渲染从 Markdown 转换而来的 HTML 内容 */
 import markdownStyles from "./markdown-styles.module.css";
 
 type Props = {

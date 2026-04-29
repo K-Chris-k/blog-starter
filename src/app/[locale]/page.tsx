@@ -1,3 +1,9 @@
+/**
+ * 前台首页 —— /[locale]
+ *
+ * 展示内容：Hero 文章（最新一篇）、更多文章列表、PDF 财报下载区域
+ * 数据来源：从 Markdown 文件读取文章，从数据库读取 PDF 列表
+ */
 import Container from "@/app/_components/container";
 import { HeroPost } from "@/app/_components/hero-post";
 import { Intro } from "@/app/_components/intro";

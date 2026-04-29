@@ -1,3 +1,9 @@
+/**
+ * 文章详情页 —— /[locale]/posts/[slug]
+ *
+ * 根据 slug 和 locale 读取对应语言的 Markdown 文件，
+ * 转换为 HTML 后渲染，包含封面图、作者信息、发布日期
+ */
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug } from "@/lib/api";

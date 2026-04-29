@@ -1,3 +1,4 @@
+/** 作者头像组件 —— 显示圆形头像 + 作者姓名 */
 type Props = {
   name: string;
   picture: string;

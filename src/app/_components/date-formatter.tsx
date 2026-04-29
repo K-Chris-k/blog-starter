@@ -1,3 +1,4 @@
+/** 日期格式化组件 —— 根据当前 locale 显示本地化日期（使用 date-fns） */
 "use client";
 
 import { parseISO, format } from "date-fns";

@@ -1,3 +1,4 @@
+/** 页面容器组件 —— 限制最大宽度并水平居中 */
 type Props = {
   children?: React.ReactNode;
 };

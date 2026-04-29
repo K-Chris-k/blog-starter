@@ -1,3 +1,4 @@
+/** 文章头部组件 —— 显示标题、封面图、作者信息、发布日期 */
 import Avatar from "./avatar";
 import CoverImage from "./cover-image";
 import DateFormatter from "./date-formatter";

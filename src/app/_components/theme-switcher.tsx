@@ -1,3 +1,4 @@
+/** 主题切换器组件 —— 亮色/暗色模式切换，读取并保存到 localStorage */
 "use client";
 
 import styles from "./switch.module.css";

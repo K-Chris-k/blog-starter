@@ -1,3 +1,4 @@
+/** 文章预览卡片组件 —— 在更多文章列表中显示缩略信息 */
 import { type Author } from "@/interfaces/author";
 import { Link } from "@/i18n/routing";
 import Avatar from "./avatar";

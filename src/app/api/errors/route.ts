@@ -1,3 +1,7 @@
+/**
+ * 错误上报 API —— 前端通过 POST 提交错误信息（ErrorReporter 组件调用）
+ * 收集页面 URL、IP、UA、屏幕分辨率等上下文，写入 error_logs 表
+ */
 import { NextRequest } from "next/server";
 import { logError } from "@/lib/logger";
 
