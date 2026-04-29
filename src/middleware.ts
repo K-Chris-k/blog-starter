@@ -19,6 +19,10 @@ export default function middleware(request: NextRequest) {
     }
   }
 
+  if (pathname.startsWith("/ir-dashboard")) {
+    return NextResponse.next();
+  }
+
   return intlMiddleware(request);
 }
 
